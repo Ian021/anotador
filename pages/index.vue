@@ -11,7 +11,7 @@
         id="textarea"
         v-model="text"
         placeholder="Enter something..."
-        rows="20"
+        rows="15"
       />
       <div class="links">
         <nuxt-link
@@ -63,6 +63,10 @@ export default {
   font-size: 100px;
   color: #707070;
   letter-spacing: 1px;
+}
+
+#textarea {
+  font-size: 24px;
 }
 
 .instructions {
