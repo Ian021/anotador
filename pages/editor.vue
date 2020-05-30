@@ -53,7 +53,7 @@ export default {
       jsonList: {},
       showJsonList: {},
       jsonId: null,
-      index: 0
+      allowModal: false
     }
   },
 
@@ -80,7 +80,6 @@ export default {
     } else {
       const doc = document.getElementsByClassName('character-span')
       for (let i = 0; i < doc.length; i++) {
-        this.index = i
         doc[i].id = i
         doc[i].addEventListener('click', this.clicked)
       }
@@ -90,10 +89,10 @@ export default {
     clicked (event) {
       this.computeIndex(parseInt(event.srcElement.id))
       this.generateId()
-      this.popModal(this.jsonId)
       this.markSubstring()
       this.generateJson()
       this.updateShowJsonList()
+      this.popModal()
     },
     computeIndex (i) {
       if (this.end_index === null) {
@@ -111,6 +110,7 @@ export default {
     generateId () {
       if (this.start_index !== null && this.end_index !== null) {
         this.jsonId = this.start_index * 100000 + this.end_index
+        this.allowModal = true
       }
     },
     markSubstring () {
@@ -129,22 +129,21 @@ export default {
       element.removeEventListener('click', this.clicked)
       element.addEventListener('click', this.modalClicked)
     },
-    unMarkCharacters (i, doc) {
-      doc[i].style.backgroundColor = ''
-      doc[i].removeEventListener('click', () => { this.clicked(i, doc[i]) })
-      doc[i].addEventListener('click', () => { this.popModal() })
+    modalClicked (event) {
+      this.allowModal = true
+      const classList = [...event.srcElement.classList]
+      for (let i = 0; i < classList.length; i++) {
+        if (classList[i].startsWith('id-')) {
+          this.jsonId = classList[i].substring(3, classList[i].length)
+        }
+      }
+      this.popModal()
     },
-    // modalClicked (event) {
-    //   console.log(event.srcElement.classList)
-    //   const id = event.srcElement.classList.filter((element) => {
-    //     element.startsWith('id-')
-    //   })
-    //   console.log(id)
-    // },
-    popModal (id) {
-      this.annotation = ''
-      if (this.start_index !== null && this.end_index !== null) {
+    popModal () {
+      if (this.allowModal) {
+        this.annotation = this.jsonList[this.jsonId].annotation
         this.$bvModal.show('my-modal')
+        this.allowModal = false
       }
     },
     handleOkModal (event) {
@@ -158,8 +157,19 @@ export default {
       this.$nextTick(() => { this.$bvModal.hide('my-modal') })
     },
     deleteJson () {
+      this.unMarkCharacters()
       delete this.jsonList[this.jsonId]
       this.updateShowJsonList()
+    },
+    unMarkCharacters () {
+      let elements = document.getElementsByClassName(`id-${this.jsonId}`)
+      while (elements[0]) { // for loop fails as the elements change at each iteration
+        elements = document.getElementsByClassName(`id-${this.jsonId}`)
+        elements[0].style.color = ''
+        elements[0].removeEventListener('click', this.modalClicked)
+        elements[0].addEventListener('click', this.clicked)
+        elements[0].classList.remove('marked', `id-${this.jsonId}`)
+      }
     },
     addAnnotation () {
       this.jsonList[this.jsonId].annotation = this.annotation
