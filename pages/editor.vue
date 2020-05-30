@@ -2,8 +2,8 @@
   <div class="container">
     <div class="subcontainer">
       <b-modal
-        hide-footer
         id="my-modal"
+        hide-footer
         title="Annotation"
         @ok="handleOkModal"
       >
@@ -13,8 +13,12 @@
             v-model="annotation"
           />
           <div class="modal-footer">
-            <b-button variant="outline-danger" class="modalbtn" @click="handleDeleteModal" block>Delete</b-button>
-            <b-button variant="outline-primary" class="modalbtn" @click="handleOkModal" block>Save</b-button>
+            <b-button variant="outline-danger" class="modalbtn" block @click="handleDeleteModal">
+              Delete
+            </b-button>
+            <b-button variant="outline-primary" class="modalbtn" block @click="handleOkModal">
+              Save
+            </b-button>
           </div>
         </form>
       </b-modal>
@@ -227,5 +231,11 @@ export default {
 .marked {
   background-color: yellow;
   cursor: pointer;
+}
+.tooltiptext {
+  visibility: visible;
+}
+.editor:hover .tooltiptext{
+  visibility: visible;
 }
 </style>
