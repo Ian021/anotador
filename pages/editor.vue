@@ -19,10 +19,13 @@
         </form>
       </b-modal>
       <div class="instructions">
-        Crtl + Click on the beggining and the end of the text you want to mark Click on the marked text to add an annotation
+        Click on the beggining and the end of the text you want to mark
+        <br>
+        Click on the marked text to add an annotation
       </div>
 
       <div class="editor computed-html" v-html="computedHtml" />
+
       <div class="editor">
         {{ showJsonList }}
       </div>
@@ -201,6 +204,7 @@ export default {
 
 <style>
 .editor {
+  font-family: monospace, monospace;
   text-align: justify;
   background-color: lightgray;
   border-radius: 5px;

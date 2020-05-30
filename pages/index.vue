@@ -66,6 +66,7 @@ export default {
 }
 
 #textarea {
+  font-family: monospace, monospace;
   font-size: 24px;
 }
 
