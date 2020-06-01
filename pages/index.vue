@@ -16,12 +16,27 @@
       <div class="links">
         <nuxt-link
           :to="{
-            name: 'editor',
-            params: { text }
+            name: 'annotation',
+            params: {
+              text,
+              parseBy: 'character'
+            }
           }"
-          class="btn btn-block button--green"
+          class="btn btn-block button--green button-next"
         >
-          Next
+          Select Character
+        </nuxt-link>
+        <nuxt-link
+          :to="{
+            name: 'annotation',
+            params: {
+              text,
+              parseBy: 'word'
+            }
+          }"
+          class="btn btn-block button--green button-next"
+        >
+          Select Word
         </nuxt-link>
       </div>
     </div>
@@ -72,14 +87,20 @@ export default {
 
 .instructions {
   font-weight: 300;
-  font-size: 30px;
+  font-size: 24px;
   color: #707070;
   text-align: left;
   margin: 3vh auto 1vh 0;
 }
 
 .links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 8px;
   padding: 15px 0;
   text-decoration: none;
+}
+.button-next {
+  margin: 8px 0;
 }
 </style>

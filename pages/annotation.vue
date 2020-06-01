@@ -24,8 +24,6 @@
       </b-modal>
       <div class="instructions">
         Click on the beggining and the end of the text you want to mark
-        <br>
-        Click on the marked text to add an annotation
       </div>
 
       <div class="editor computed-html" v-html="computedHtml" />
@@ -49,10 +47,13 @@
 </template>
 
 <script>
+import textToSpan from '../assets/textToSpan'
+
 export default {
   data () {
     return {
       text: this.$route.params.text,
+      parseBy: this.$route.params.parseBy,
       start_index: null,
       end_index: null,
       substring: '',
@@ -66,23 +67,18 @@ export default {
 
   computed: {
     computedHtml () {
-      if (this.text) {
-        const textBroken = this.text.split('\n')
-        const htmlBroken = Array(textBroken.length).fill('')
-        for (let line = 0; line < textBroken.length; line++) {
-          for (let k = 0; k < textBroken[line].length; k++) {
-            htmlBroken[line] += `<span class="character-span">${textBroken[line].charAt(k)}</span>`
-          }
-        }
-        return htmlBroken.join('<br/>')
+      if (this.parseBy === 'character') {
+        return textToSpan.parseByCharacter(this.text)
+      } else if (this.parseBy === 'word') {
+        return textToSpan.parseByWord(this.text)
       } else {
-        return ''
+        return 'error'
       }
     }
   },
 
   mounted () {
-    if (!this.text) {
+    if (!this.text || !this.parseBy) {
       this.$router.push('/')
     } else {
       const doc = document.getElementsByClassName('character-span')
@@ -128,7 +124,9 @@ export default {
           this.markCharacters(doc[i])
           charList.push(doc[i].innerHTML)
         }
-        this.substring = charList.join('')
+        this.substring = charList.join(
+          this.parseBy === 'character' ? '' : ' '
+        )
       }
     },
     markCharacters (element) {
