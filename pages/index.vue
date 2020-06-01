@@ -2,51 +2,59 @@
   <div class="container">
     <div class="subcontainer">
       <h1 class="title">
-        Anotador
+        {{ textPhrases.index_title }}
       </h1>
       <div class="instructions">
-        Paste your text below:
+        {{ textPhrases.index_instructions }}
       </div>
       <b-form-textarea
         id="textarea"
         v-model="text"
-        placeholder="Enter something..."
+        :placeholder="textPhrases.index_instructions"
         rows="15"
       />
-      <div class="links">
-        <nuxt-link
-          :to="{
-            name: 'annotation',
-            params: {
-              text,
-              parseBy: 'character'
-            }
-          }"
-          class="btn btn-block button--green button-next"
-        >
-          Select Character
-        </nuxt-link>
-        <nuxt-link
-          :to="{
-            name: 'annotation',
-            params: {
-              text,
-              parseBy: 'word'
-            }
-          }"
-          class="btn btn-block button--green button-next"
-        >
-          Select Word
-        </nuxt-link>
+      <div>
+        <div class="instructions">
+          {{ textPhrases.index_selection }}
+        </div>
+        <div class="links">
+          <nuxt-link
+            :to="{
+              name: 'annotation',
+              params: {
+                text,
+                parseBy: 'character'
+              }
+            }"
+            class="btn btn-block button--green button-next"
+          >
+            {{ textPhrases.index_btn_character }}
+          </nuxt-link>
+          <nuxt-link
+            :to="{
+              name: 'annotation',
+              params: {
+                text,
+                parseBy: 'word'
+              }
+            }"
+            class="btn btn-block button--green button-next"
+          >
+            {{ textPhrases.index_btn_word }}
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import textLanguage from '../assets/textLanguages'
+
 export default {
   data () {
     return {
+      textPhrases: textLanguage('pt'),
       text: this.$route.params.text
     }
   }
@@ -82,7 +90,7 @@ export default {
 
 #textarea {
   font-family: monospace, monospace;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .instructions {
@@ -90,14 +98,13 @@ export default {
   font-size: 24px;
   color: #707070;
   text-align: left;
-  margin: 3vh auto 1vh 0;
+  margin: 1vh auto 1vh 0;
 }
 
 .links {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 8px;
-  padding: 15px 0;
   text-decoration: none;
 }
 .button-next {
