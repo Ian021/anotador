@@ -4,7 +4,7 @@
       <b-modal
         id="my-modal"
         hide-footer
-        :title="textPhrases.annotation_modal_title"
+        :title="$store.state.language.textPhrases.annotation_modal_title"
         @ok="handleOkModal"
       >
         <form ref="form" @submit.stop.prevent="handleOkModal">
@@ -14,16 +14,16 @@
           />
           <div class="modal-footer">
             <b-button variant="outline-danger" class="modalbtn" block @click="handleDeleteModal">
-              {{ textPhrases.annotation_modal_btn_delete }}
+              {{ $store.state.language.textPhrases.annotation_modal_btn_delete }}
             </b-button>
             <b-button variant="outline-primary" class="modalbtn" block @click="handleOkModal">
-              {{ textPhrases.annotation_modal_btn_save }}
+              {{ $store.state.language.textPhrases.annotation_modal_btn_save }}
             </b-button>
           </div>
         </form>
       </b-modal>
       <div class="instructions">
-        {{ textPhrases.annotation_instructions }}
+        {{ $store.state.language.textPhrases.annotation_instructions }}
       </div>
 
       <div class="editor computed-html" v-html="computedHtml" />
@@ -39,7 +39,7 @@
           }"
           class="btn btn-block button--green"
         >
-          {{ textPhrases.annotation_btn_back }}
+          {{ $store.state.language.textPhrases.annotation_btn_back }}
         </nuxt-link>
       </div>
     </div>
@@ -48,12 +48,10 @@
 
 <script>
 import textToSpan from '../assets/textToSpan'
-import textLanguage from '../assets/textLanguages'
 
 export default {
   data () {
     return {
-      textPhrases: textLanguage('pt'),
       text: this.$route.params.text,
       parseBy: this.$route.params.parseBy,
       start_index: null,

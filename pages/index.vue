@@ -2,20 +2,20 @@
   <div class="container">
     <div class="subcontainer">
       <h1 class="title">
-        {{ textPhrases.index_title }}
+        {{ $store.state.language.textPhrases.index_title }}
       </h1>
       <div class="instructions">
-        {{ textPhrases.index_instructions }}
+        {{ $store.state.language.textPhrases.index_instructions }}
       </div>
       <b-form-textarea
         id="textarea"
         v-model="text"
-        :placeholder="textPhrases.index_instructions"
+        :placeholder="$store.state.language.textPhrases.index_textarea"
         rows="15"
       />
       <div>
         <div class="instructions">
-          {{ textPhrases.index_selection }}
+          {{ $store.state.language.textPhrases.index_selection }}
         </div>
         <div class="links">
           <nuxt-link
@@ -28,7 +28,7 @@
             }"
             class="btn btn-block button--green button-next"
           >
-            {{ textPhrases.index_btn_character }}
+            {{ $store.state.language.textPhrases.index_btn_character }}
           </nuxt-link>
           <nuxt-link
             :to="{
@@ -40,7 +40,7 @@
             }"
             class="btn btn-block button--green button-next"
           >
-            {{ textPhrases.index_btn_word }}
+            {{ $store.state.language.textPhrases.index_btn_word }}
           </nuxt-link>
         </div>
       </div>
@@ -49,15 +49,13 @@
 </template>
 
 <script>
-import textLanguage from '../assets/textLanguages'
-
 export default {
   data () {
     return {
-      textPhrases: textLanguage('pt'),
       text: this.$route.params.text
     }
-  }
+  },
+  mounted () { console.log(this.$store.state.language.selected) }
 }
 </script>
 
