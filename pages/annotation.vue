@@ -104,7 +104,7 @@ export default {
         document.getElementById(i).style.color = 'red'
         if (this.start_index === null) {
           this.start_index = i
-        } else if (this.start_index !== null && i > this.start_index) {
+        } else if (this.start_index !== null && i >= this.start_index) {
           this.end_index = i
         } else if (this.start_index !== null && i < this.start_index) {
           this.end_index = this.start_index
