@@ -3,7 +3,7 @@
     <b-navbar-brand href="/" class="ml-1">
       {{ $store.state.language.textPhrases.index_title }}
     </b-navbar-brand>
-    <b-navbar-nav class="ml-auto mr-1">
+    <b-navbar-nav class="ml-auto mr-1 nav-right">
       <div class="language-card">
         <img :src="languagesOptions[$store.state.language.selected].path" alt="" class="flag">
         <b-nav-item-dropdown :text="$store.state.language.selected" class="language-name" right>
@@ -50,6 +50,11 @@ export default {
 .customnav {
   position: absolute;
   width: 100%;
+}
+.nav-right {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-column-gap: 8px;
 }
 .language-card {
   display: flex;
