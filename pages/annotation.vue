@@ -38,7 +38,7 @@
             name: 'index',
             params: { text }
           }"
-          class="btn btn-block button--green"
+          class="btn btn-block button--green button-back"
         >
           {{ $store.state.language.textPhrases.annotation_btn_back }}
         </nuxt-link>
@@ -243,5 +243,8 @@ export default {
 }
 .links-annotation {
   text-decoration: none;
+}
+.button-back {
+  margin: 8px 0;
 }
 </style>
