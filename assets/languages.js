@@ -52,12 +52,12 @@ const textLanguages = {
     EN: 'Click on the beggining and the end of the text you want to mark'
   },
   annotation_btn_json: {
-    PT: '',
-    EN: ''
+    PT: 'Formato Json',
+    EN: 'Json Format'
   },
   annotation_btn_table: {
-    PT: '',
-    EN: ''
+    PT: 'Formato Tabela',
+    EN: 'Table Format'
   },
   annotation_btn_back: {
     PT: 'Voltar',

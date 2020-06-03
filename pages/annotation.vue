@@ -11,6 +11,7 @@
           <b-form-input
             id="annotation-input"
             v-model="annotation"
+            autofocus
           />
           <div class="modal-footer">
             <b-button variant="outline-danger" class="modalbtn" block @click="handleDeleteModal">
@@ -28,10 +29,10 @@
 
       <div class="editor computed-html" v-html="computedHtml" />
 
-      <div class="editor">
-        {{ showJsonList }}
-      </div>
-      <div class="links">
+      <DisplayAnnotations
+        :annotations="showJsonList"
+      />
+      <div class="links-annotation">
         <nuxt-link
           :to="{
             name: 'index',
@@ -48,8 +49,12 @@
 
 <script>
 import textToSpan from '../assets/textToSpan'
+import DisplayAnnotations from '../components/DisplayAnnotations'
 
 export default {
+  components: {
+    DisplayAnnotations
+  },
   data () {
     return {
       text: this.$route.params.text,
@@ -59,7 +64,7 @@ export default {
       substring: '',
       annotation: '',
       jsonList: {},
-      showJsonList: {},
+      showJsonList: '{}',
       jsonId: null,
       allowModal: false
     }
@@ -235,5 +240,8 @@ export default {
 }
 .editor:hover .tooltiptext{
   visibility: visible;
+}
+.links-annotation {
+  text-decoration: none;
 }
 </style>

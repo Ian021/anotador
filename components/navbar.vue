@@ -9,9 +9,9 @@
         <b-nav-item-dropdown :text="$store.state.language.selected" class="language-name" right>
           <b-dropdown-item
             v-for="language in languagesOptions"
-            :key = language.name
-            @click="setLanguage(language.name)"
+            :key="language.name"
             class="language-card"
+            @click="setLanguage(language.name)"
           >
             <img :src="language.path" alt="" class="flag">
             <span class="language-name">{{ language.name }}</span>

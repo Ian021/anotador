@@ -54,8 +54,7 @@ export default {
     return {
       text: this.$route.params.text
     }
-  },
-  mounted () { console.log(this.$store.state.language.selected) }
+  }
 }
 </script>
 
