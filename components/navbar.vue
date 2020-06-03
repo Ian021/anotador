@@ -1,6 +1,7 @@
 <template class="container">
   <b-navbar toggleable="lg" type="dark" variant="info" class="customnav">
     <b-navbar-brand href="/" class="ml-1">
+      <img src="marker-white.svg" class="logo" alt="">
       {{ $store.state.language.textPhrases.index_title }}
     </b-navbar-brand>
     <b-navbar-nav class="ml-auto mr-1 nav-right">
@@ -69,5 +70,9 @@ export default {
 }
 .language-name {
   align-self: center;
+}
+.logo {
+  width: 32px;
+  height: 32px;
 }
 </style>
