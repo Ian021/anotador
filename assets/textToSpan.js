@@ -17,13 +17,17 @@ export default {
   parseByWord (text) {
     if (text) {
       const textBroken = text.split('\n')
-      const htmlBroken = Array(textBroken.length).fill([])
+      const htmlBroken = []
       for (let line = 0; line < textBroken.length; line++) {
         const words = textBroken[line].split(' ')
+        const singleLine = []
+        // console.log('words: ', words)
         for (let k = 0; k < words.length; k++) {
-          htmlBroken[line].push(`<span class="character-span">${words[k]}</span>`)
+          singleLine.push(`<span class="character-span">${words[k]}</span>`)
+          // console.log('word', htmlBroken[line])
         }
-        htmlBroken[line] = htmlBroken[line].join('<span class="character-span"> </span>')
+        htmlBroken.push(singleLine.join('<span class="character-span"> </span>'))
+        // console.log('joint text', line, htmlBroken[line])
       }
       return htmlBroken.join('<br/>')
     } else {
