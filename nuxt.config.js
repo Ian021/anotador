@@ -17,7 +17,7 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/marker-blue.svg" }],
     script: [
       {
-        "data-ad-client": "ca-pub-1672451642704467",
+        "data-ad-client": "ca-pub-1793040047726801",
         async: true,
         src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
       }
